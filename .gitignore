@@ -213,3 +213,4 @@ static/
 
 # My ignores
 .idea
+activate_myvenv.bat
