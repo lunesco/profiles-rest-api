@@ -33,6 +33,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         )
 
         return user
+        # return models.UserProfile.objects.create_user(**validated_data) # z docsów, też działało
 
     def update(self, instance, validated_data):
         """Handle updating user account"""
