@@ -7,6 +7,7 @@ class HelloSerializer(serializers.Serializer):
     """Serializers a name filed for testing our APIView"""
     name = serializers.CharField(max_length=10)
     surname = serializers.CharField(max_length=15)
+    age = serializers.IntegerField(min_value=1, max_value=127)
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -26,14 +27,14 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """Create and return a new user"""
-        user = models.UserProfile.objects.create_user(
-            email=validated_data['email'],
-            name=validated_data['name'],
-            password=validated_data['password'],
-        )
-
-        return user
-        # return models.UserProfile.objects.create_user(**validated_data) # z docsów, też działało
+        # user = models.UserProfile.objects.create_user(
+        #     email=validated_data['email'],
+        #     name=validated_data['name'],
+        #     password=validated_data['password'],
+        # )
+        #
+        # return user
+        return models.UserProfile.objects.create_user(**validated_data)  # z docsów, też działało
 
     def update(self, instance, validated_data):
         """Handle updating user account"""

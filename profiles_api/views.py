@@ -33,8 +33,9 @@ class HelloApiView(APIView):
         if serializer.is_valid():
             name = serializer.validated_data.get('name')
             surname = serializer.validated_data.get('surname')
-            message = f'Hello {name} {surname}!'
-            return Response({'message': message})
+            age = serializer.validated_data.get('age')
+            message = f'Hello {name.capitalize()} {surname.capitalize()}!'
+            return Response({'message': message, 'of age': age > 18})
         else:
             return Response(
                 serializer.errors,
@@ -77,8 +78,9 @@ class HelloViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             name = serializer.validated_data.get('name')
             surname = serializer.validated_data.get('surname')
-            message = f'Hello {name} {surname}!'
-            return Response({'message': message})
+            age = serializer.validated_data.get('age')
+            message = f'Hello {name.capitalize()} {surname.capitalize()}!'
+            return Response({'type': 'create', 'message': message, 'of age': age > 18})
         else:
             return Response(
                 serializer.errors,
